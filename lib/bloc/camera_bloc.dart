@@ -157,4 +157,12 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
       )
     );
   }
+
+  @override
+  Future<void> close() async {
+    if (state is CameraReady) {
+      await (state as CameraReady).controller.dispose();
+    }
+    return super.close();
+  }
 }
