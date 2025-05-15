@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera_app/native_camera_page.dart';
 import 'package:camera_app/storage_helper.dart';
+import 'package:camera_app/storage_helper_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -41,7 +42,7 @@ class _FullPageState extends State<FullPage> {
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.gallery);
     if (picked != null) {
-      final saved = await StorageHelper.saveImage(File(picked.path), 'gallery');
+      final saved = await StorageHelperBloc.saveImage(File(picked.path), 'gallery');
       setState(() => _imageFile = saved);
       ScaffoldMessenger.of(
         context,
