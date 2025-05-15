@@ -1,4 +1,4 @@
-# Preview APP
+# Preview Camera Manual APP
 # FullPage / Beranda
 
 ![image](https://github.com/user-attachments/assets/878292ea-ef0e-4220-a271-3a8a746c50a0)
