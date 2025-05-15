@@ -3,6 +3,11 @@ import 'package:bloc/bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:camera_app/bloc/camera_event.dart';
 import 'package:camera_app/bloc/camera_state.dart';
+import 'package:camera_app/native_camera_page.dart';
+import 'package:camera_app/storage_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CameraBloc extends Bloc<CameraEvent, CameraState> {
@@ -21,21 +26,21 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     on<RequestPermission>(_onRequestPermissions);
   }
 
-    Future<void> _onInit(
+  Future<void> _onInit(
       InitializeCamera event, Emitter<CameraState> emit) async {
     _cameras = await availableCameras();
 
     await _setupController(0, emit);
   }
 
-    Future<void> _onSwitch(SwitchCamera event, Emitter<CameraState> emit) async {
+  Future<void> _onSwitch(SwitchCamera event, Emitter<CameraState> emit) async {
     if (state is! CameraReady) return;
     final s = state as CameraReady;
     final next = (s.selectedIndex + 1) % _cameras.length;
     await _setupController(next, emit, previous: s);
   }
 
-    Future<void> _onToggleFlash(
+  Future<void> _onToggleFlash(
     ToogleFlash event, Emitter<CameraState> emit) async {
       if (state is! CameraReady) return;
       final s = state as CameraReady;
@@ -48,7 +53,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
       emit(s.copyWith(flashMode: next));
   }
 
-    Future<void> _onTakePicture(
+  Future<void> _onTakePicture(
     TakePicture event, Emitter<CameraState> emit) async {
       if (state is! CameraReady) return;
       final s = state as CameraReady;
@@ -57,7 +62,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     );
   }
 
-    Future<void> _onTapFocus(TapToFocus event, Emitter<CameraState> emit) async {
+  Future<void> _onTapFocus(TapToFocus event, Emitter<CameraState> emit) async {
     if (state is! CameraReady) return;
     final s = state as CameraReady;
     final relative = Offset(
@@ -68,7 +73,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     await s.controller.setExposurePoint(relative);
   }
 
-    Future<void> _onPickGallery(
+  Future<void> _onPickGallery(
         PickImageFromGallery event, Emitter<CameraState> emit) async {
       if (state is! CameraReady) return;
       final picker = ImagePicker();
@@ -79,5 +84,35 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
         snackBarMessage: 'Berhasil memilih dari galeri',
       )
     );
+  }
+
+  Future<void> _onOpenCamera(
+    OpenCameraAndCapture event,
+    Emitter<CameraState> emit,
+  ) async {
+    print('[CameraBloc] OpenCameraAndCapture triggered');
+
+    if (state is! CameraReady) {
+      print('[CameraBloc] state is not ready, abort');
+      return;
+    }
+
+    final file = await Navigator.push<File?>(
+      event.context,
+      MaterialPageRoute(
+        builder: (_) => BlocProvider.value(
+          value: this,
+          child: const CameraPage(),
+        ),
+      ),
+    );
+
+    if (file != null) {
+      final saved = await StorageHelper.saveImage(file, 'camera');
+      emit((state as CameraReady).copyWith(
+        imageFile: saved,
+        snackBarMessage: 'Disimpan ${saved.path}'
+      ));
+    }
   }
 }
