@@ -30,3 +30,5 @@ final class OpenCameraAndCapture extends CameraEvent {
 final class DeleteImage extends CameraEvent {}
 
 final class ClearSnackbar extends CameraEvent {}
+
+final class RequestPermission extends CameraEvent {}
