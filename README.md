@@ -15,15 +15,21 @@
 
 ![image](https://github.com/user-attachments/assets/a2a40894-4699-4eef-a2eb-a3c17c4a5a1c)
 
+![image](https://github.com/user-attachments/assets/b003886c-ace0-4459-b0a6-c8d22fa34957)
+
+# Penyimpanan
+
+![image](https://github.com/user-attachments/assets/cd078f93-2b40-4e96-85f0-1c2117711b62)
+
 # Fungsi Delete
+
+![image](https://github.com/user-attachments/assets/8e036797-2177-466b-a031-fdefa3a532fc)
 
 # Pilih dari Galeri / Photos & Album
 
-![image](https://github.com/user-attachments/assets/dc3bdb92-f1ed-4933-8a3a-4102122ead50)
+![image](https://github.com/user-attachments/assets/75f92cd1-ac60-4315-9afe-de7547c2093a)
 
-![image](https://github.com/user-attachments/assets/72d0b495-267a-4e8f-9129-18bdd05c2c38)
-
-
+![image](https://github.com/user-attachments/assets/61606b04-78ca-4019-8aeb-00f4c4cc3da3)
 
 # camera_app
 
