@@ -26,6 +26,10 @@
 
 ![image](https://github.com/user-attachments/assets/7c3524e1-72de-4898-9088-4b89ace5fb33)
 
+# Penyimpanan
+
+![image](https://github.com/user-attachments/assets/d0c561e5-b48f-4aa5-be1b-2ffddcd748c8)
+
 # camera_app
 
 A new Flutter project.
